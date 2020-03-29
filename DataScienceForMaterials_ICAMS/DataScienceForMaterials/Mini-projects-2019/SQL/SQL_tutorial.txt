@@ -1,0 +1,48 @@
+- Open SQLite browser
+- Load elements.db database
+- Run the following SQL commands in `Execute SQL` tab
+- select all
+SELECT * FROM elements
+
+
+- select only two columns
+SELECT atomicNumber, symbol FROM elements
+
+- select two columns with condition
+SELECT atomicNumber, symbol FROM elements WHERE groupBlock='transition metal'
+
+- join two tables on the atomicNumber column
+SELECT elements.atomicNumber, symbol, oxidation_state FROM elements, oxidation WHERE  elements.atomicNumber=oxidation.atomicNumber
+
+- join two tables. Add the condition:
+SELECT elements.atomicNumber, symbol, oxidation_state FROM elements, oxidation WHERE  elements.atomicNumber=oxidation.atomicNumber AND  groupBlock='transition metal'
+
+- Group by groupBlock and count the rows in each group:
+SELECT groupBlock, COUNT(*) FROM elements GROUP BY groupBlock
+
+- Group by groupBlock, count the rows in each group and sort by this number:
+SELECT groupBlock, COUNT(*) FROM elements GROUP BY groupBlock ORDER BY COUNT(*) 
+
+SELECT groupBlock, COUNT(*) FROM elements GROUP BY groupBlock ORDER BY COUNT(*) DESC 
+
+- Group by groupBlock, count the rows, compute average and minimum melting point in each group:
+SELECT bondingType, COUNT(*), AVG(meltingPoint), MAX(meltingPoint) FROM elements GROUP BY bondingType ORDER BY AVG(meltingPoint) DESC 
+
+- Count the number of valence electrons
+SELECT   elements.symbol,  valence.* FROM elements, valence WHERE  elements.atomicNumber=valence.atomicNumber 
+
+SELECT   elements.symbol,  sum(valence.number_electrons) FROM elements, valence WHERE  elements.atomicNumber=valence.atomicNumber GROUP BY symbol
+
+
+Tasks write the queries to 
+- find max value of melting point in each group block, order by melting point
+- select elements with most negative and most positive oxidation state
+- find the min and max melting temperature for each bonding type (bondingType column)
+- find the elements with melting point close to room temperature (within +/- 50K range)
+
+In some cases, it could be more than one query.
+
+Report:
+Provide the SQL queries and their results
+
+
